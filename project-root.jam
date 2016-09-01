@@ -1,0 +1,64 @@
+#*
+#*	Copyright (c) 2016 Malcolm Cifuentes
+#***********************************************************************
+#* This file is part of PulseCounter:
+#*	https://https://github.com/pulsecounter/
+#*
+#*    PulseCounter is free software: you can redistribute it and/or modify
+#*    it under the terms of the GNU Lesser General Public License as
+#*    published by the Free Software Foundation, either version 3 of the
+#*    License, or (at your option) any later version.
+#*
+#*    PulseCounter is distributed in the hope that it will be useful,
+#*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#*    GNU Lesser General Public License for more details.
+#*
+#*    You should have received a copy of the GNU Lesser General Public
+#*    License along with PulseCounter.
+#*    If not, see <http://www.gnu.org/licenses/>.
+#***********************************************************************
+#*/
+
+import os ;
+
+#
+# this line is to get around a weird issue when compiling cryptopp
+# if you don't have this command, the bjam tries to use the library 
+# as the shell.
+#
+#modules.poke gcc : JAMSHELL : cmd.exe /Q/C % ;
+
+path-constant TOP : . ;
+
+constant BOOST : $(TOP)/boost/boost_1_60_0 ;
+
+#
+# the boost libraries are in different folders for each compiler.
+# This approach simplifies Jamfiles
+#
+if [ MATCH (target-os=linux) : [ modules.peek : ARGV ] ] 
+{
+constant BOOSTLIB : $(BOOST)/libs/linux-gcc49 ;
+}
+else
+{
+constant BOOSTLIB : $(BOOST)/libs/windows-vc120 ;
+}
+
+
+#
+# BOOST_ALL_NO_LIB - disable boost autolinking
+#
+project
+    : requirements <include>$(BOOST) 
+    : requirements <include>$(TOP)
+    : requirements <define>BOOST_ALL_NO_LIB
+    : requirements <toolset>msvc:<define>WIN32
+    : requirements <toolset>msvc:<define>NDEBUG
+    : requirements <define>_SECURE_SCL=0
+    : requirements <toolset>msvc:<define>_CRT_SECURE_NO_WARNINGS=0
+    : requirements <define>_HAS_ITERATOR_DEBUGGING=0
+    : requirements <toolset>gcc-4.9.2:<define>UNICODE=1
+    : requirements <toolset>gcc-4.9.2:<define>UNICODE=1
+    ;

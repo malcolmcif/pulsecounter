@@ -1,0 +1,77 @@
+#*
+#*	Copyright (c) 2016 Malcolm Cifuentes
+#***********************************************************************
+#* This file is part of PulseCounter:
+#*	https://https://github.com/pulsecounter/
+#*
+#*    PulseCounter is free software: you can redistribute it and/or modify
+#*    it under the terms of the GNU Lesser General Public License as
+#*    published by the Free Software Foundation, either version 3 of the
+#*    License, or (at your option) any later version.
+#*
+#*    PulseCounter is distributed in the hope that it will be useful,
+#*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#*    GNU Lesser General Public License for more details.
+#*
+#*    You should have received a copy of the GNU Lesser General Public
+#*    License along with PulseCounter.
+#*    If not, see <http://www.gnu.org/licenses/>.
+#***********************************************************************
+#*/
+
+LIBRARY.name  = PulseCounterLibrary ;
+
+LIBRARY.files = [ glob *.h *.cpp ] ;
+
+if [ MATCH (target-os=linux) : [ modules.peek : ARGV ] ] 
+{
+lib WiringPi : : <toolset>gcc-4.9.2:<file>$(PROJECT_TOP)/wiringPi/wiringPi/lib49wiringPi.a : : <include>$(PROJECT_TOP)/wiringPi/wiringPi ; 
+}
+
+lib BoostThread : : <target-os>linux <name>boost_thread_pthread-mt-1_60 <search>$(BOOSTLIB) ;
+lib BoostThread : : <target-os>windows <name>boost_thread-mt-1_60 <search>$(BOOSTLIB) ;
+lib BoostSystem : : <name>boost_system-mt-1_60 <search>$(BOOSTLIB) ;
+lib BoostLog : : <name>boost_log-mt-1_60 <search>$(BOOSTLIB) ;
+lib BoostLogSetup : : <name>boost_log_setup-mt-1_60 <search>$(BOOSTLIB) ;
+lib BoostProgramOptions : : <name>boost_program_options-mt-1_60 <search>$(BOOSTLIB) ;
+
+# 
+# Provide wiring pi library when linking for linux
+#
+rule architecture-dependant-libs ( properties * )
+{
+    local result ;
+
+    if <target-os>linux in $(properties)
+    {
+        result += <library>WiringPi ;
+    }
+
+    return $(result) ;
+}
+
+#
+# Provide wiring pi include when compiling for linux
+#
+rule architecture-dependant-includes ( properties * )
+{
+    local result ;
+
+    if <target-os>linux in $(properties)
+    {
+        result += <include>$(PROJECT_TOP)/wiringPi/wiringPi ;
+    }
+
+    return $(result) ;
+}
+
+lib $(LIBRARY.name) : $(LIBRARY.files) 
+                    : <conditional>@architecture-dependant-includes
+                    :
+                    : <link>static
+                      <conditional>@architecture-dependant-libs <library>BoostThread <library>BoostSystem <library>BoostLogSetup 
+                      <library>BoostLog <library>BoostLogSetup <library>BoostProgramOptions <library>BoostThread
+
+    ;
+

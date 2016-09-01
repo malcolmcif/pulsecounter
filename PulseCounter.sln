@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestSuiteRunner", "TestSuiteRunner\TestSuiteRunner.vcxproj", "{6539988C-6D56-45DA-90DA-F4EE4C285802}"
+	ProjectSection(ProjectDependencies) = postProject
+		{842305AA-0948-40BD-A599-3ECBEF0CE615} = {842305AA-0948-40BD-A599-3ECBEF0CE615}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PulseCounter", "PulseCounter\PulseCounter.vcxproj", "{B8F48ADE-B7AE-4B0B-BF6D-171E5D548818}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PulseCounterLibrary", "PulseCounterLibrary\PulseCounterLibrary.vcxproj", "{842305AA-0948-40BD-A599-3ECBEF0CE615}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Lite|Win32 = Lite|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6539988C-6D56-45DA-90DA-F4EE4C285802}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6539988C-6D56-45DA-90DA-F4EE4C285802}.Debug|Win32.Build.0 = Debug|Win32
+		{6539988C-6D56-45DA-90DA-F4EE4C285802}.Lite|Win32.ActiveCfg = Release|Win32
+		{6539988C-6D56-45DA-90DA-F4EE4C285802}.Lite|Win32.Build.0 = Release|Win32
+		{6539988C-6D56-45DA-90DA-F4EE4C285802}.Release|Win32.ActiveCfg = Release|Win32
+		{6539988C-6D56-45DA-90DA-F4EE4C285802}.Release|Win32.Build.0 = Release|Win32
+		{B8F48ADE-B7AE-4B0B-BF6D-171E5D548818}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B8F48ADE-B7AE-4B0B-BF6D-171E5D548818}.Debug|Win32.Build.0 = Debug|Win32
+		{B8F48ADE-B7AE-4B0B-BF6D-171E5D548818}.Lite|Win32.ActiveCfg = Lite|Win32
+		{B8F48ADE-B7AE-4B0B-BF6D-171E5D548818}.Lite|Win32.Build.0 = Lite|Win32
+		{B8F48ADE-B7AE-4B0B-BF6D-171E5D548818}.Release|Win32.ActiveCfg = Release|Win32
+		{B8F48ADE-B7AE-4B0B-BF6D-171E5D548818}.Release|Win32.Build.0 = Release|Win32
+		{842305AA-0948-40BD-A599-3ECBEF0CE615}.Debug|Win32.ActiveCfg = Debug|Win32
+		{842305AA-0948-40BD-A599-3ECBEF0CE615}.Debug|Win32.Build.0 = Debug|Win32
+		{842305AA-0948-40BD-A599-3ECBEF0CE615}.Lite|Win32.ActiveCfg = Release|Win32
+		{842305AA-0948-40BD-A599-3ECBEF0CE615}.Lite|Win32.Build.0 = Release|Win32
+		{842305AA-0948-40BD-A599-3ECBEF0CE615}.Release|Win32.ActiveCfg = Release|Win32
+		{842305AA-0948-40BD-A599-3ECBEF0CE615}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
